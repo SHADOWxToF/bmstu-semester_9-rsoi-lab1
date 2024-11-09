@@ -6,7 +6,7 @@ from database import Person, PersonScheme
 from typing import Annotated
 from fastapi.encoders import jsonable_encoder
 from contextlib import asynccontextmanager
-
+import uvicorn
 
 app = FastAPI()
 
@@ -88,3 +88,6 @@ def update_person(person_id: int, person: PersonScheme, session: SessionDep):
     session.commit()
     session.refresh(db_person)
     return db_person
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

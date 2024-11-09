@@ -2,4 +2,4 @@
 
 docker compose up postgres -d
 pip install -r requirements.txt
-fastapi run app/main.py
+python app/main.py &
