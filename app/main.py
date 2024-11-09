@@ -7,10 +7,14 @@ from typing import Annotated
 from fastapi.encoders import jsonable_encoder
 from contextlib import asynccontextmanager
 import uvicorn
+from multiprocessing import Process
+import os
 
 app = FastAPI()
 
-engine = create_engine("postgresql://program:test@localhost:5432/persons")
+# "postgresql://program:test@localhost:5432/persons"
+database_url = os.environ["DATABASE_URL"]
+engine = create_engine(database_url)
 
 
 
@@ -89,5 +93,12 @@ def update_person(person_id: int, person: PersonScheme, session: SessionDep):
     session.refresh(db_person)
     return db_person
 
-if __name__ == "__main__":
+def daemon():
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+if __name__ == "__main__":
+    pr = Process(target=daemon)
+    pr.daemon = True
+    pr.start()
+    pr.join()

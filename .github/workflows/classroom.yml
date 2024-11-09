@@ -18,9 +18,10 @@ jobs:
         with:
           python-version: "3.10"
       - run: |
-          chmod 777 script.sh
-          ./script.sh
-          pytest
+          docker compose up postgres -d
+          pip install -r requirements.txt
+          export DATABASE_URL="postgresql://program:test@localhost:5432/persons"
+          python app/tests.py
           
 
   build:
