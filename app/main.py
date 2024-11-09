@@ -10,7 +10,7 @@ from contextlib import asynccontextmanager
 
 app = FastAPI()
 
-engine = create_engine("postgresql://program:test@postgres:5432/persons")
+engine = create_engine("postgresql://program:test@localhost:5432/persons")
 
 
 
