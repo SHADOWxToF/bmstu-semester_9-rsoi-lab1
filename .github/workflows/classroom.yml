@@ -19,9 +19,9 @@ jobs:
           python-version: "3.10"
       - run: |
           docker compose up postgres -d
-          pwd
-          ls
-          pip install -r requirmemnts.txt
+          pip install -r requirements.txt
+          fastapi run app/main.py &
+          pytest
 
   build:
     name: Autograding
