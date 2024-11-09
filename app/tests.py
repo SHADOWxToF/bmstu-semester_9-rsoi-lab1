@@ -1,7 +1,10 @@
 from fastapi.testclient import *
-from main import app
+from main import app, engine
+from sqlmodel import SQLModel
 
 client = TestClient(app)
+
+SQLModel.metadata.create_all(engine)
 
 def test_get_persons():
     response = client.get("/api/v1/persons")
