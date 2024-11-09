@@ -18,6 +18,8 @@ services:
     container_name: app
     build:
       dockerfile: ./Dockerfile
+      args:
+        database_url: "postgresql://program:test@postgres:5432/persons"
     ports:
       - "8000:8000"
 

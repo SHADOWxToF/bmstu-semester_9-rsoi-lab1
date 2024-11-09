@@ -7,6 +7,14 @@ on:
     branches:
       - master
 jobs:
+  build_1:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - run: docker compose build app
+      
   tests:
     name: UnitTesting
     runs-on: ubuntu-latest
@@ -22,13 +30,6 @@ jobs:
           pip install -r requirements.txt
           export DATABASE_URL="postgresql://program:test@localhost:5432/persons"
           pytest app/tests.py
-  build_1:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - run: docker compose build app
 
   build:
     name: Autograding
